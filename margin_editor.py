@@ -14,29 +14,36 @@ def printPageHeader():
     return
 
 def main():
-    input_ = open("input_file.txt", "r") 
-    file_line_length = 80
+    input_file = open("input_file.txt", "r") 
+    max_file_line_length = 80
     selected_margins = obtainMargins()
-    file_line = input_.readline()
+    file_line = input_file.readline()
+    file_line = file_line[:-1]
     right_padding = " " * int(selected_margins[0])
     left_padding = " " * int(selected_margins[1])
-    file_line_length = 80 - int(selected_margins[0]) - int(selected_margins[1]) - len(file_line)
-    if file_line_length >= 0:
+    available_file_line_length = max_file_line_length - int(selected_margins[0]) - int(selected_margins[1])
+    if available_file_line_length - len(file_line) >= 0:
         file_line = right_padding + file_line + left_padding
     else:
-        available_line_length = 80 - (int(selected_margins[0]) + int(selected_margins[1]))
         counter = 0
         file_line_words = file_line.split()
-        file_line = right_padding + file_line_words[counter] + " "
-        available_line_length -= (1 + len(file_line_words[counter]))
-        while available_line_length >= 0:
+        if available_file_line_length - len(file_line_words[0]) >= 0:
+            file_line = right_padding + file_line_words[counter] + " "
+            available_file_line_length -= (1 + len(file_line_words[counter]))
+            print(available_file_line_length)
+        else:
+            file_line = right_padding
+        while available_file_line_length - len(file_line_words[counter]) -1 >= 0:
             counter += 1
             file_line += file_line_words[counter] + " "
-            available_line_length -= 1 + len(file_line_words[counter])
+            available_file_line_length -= 1 + len(file_line_words[counter])
+            print(available_file_line_length)
         file_line += left_padding
+        extraneous_words = file_line_words[counter+1:]
+        print(extraneous_words)
     printPageHeader()
     print(file_line)
-    print(file_line_length)
+    print(available_file_line_length)
     return 
 
 main()
