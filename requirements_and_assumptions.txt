@@ -16,5 +16,8 @@
 2. The program works on the basis that font styles take up one character space per character.
 3. The maximum input line is 80 characters long.
 4. Words are separated by one blank.
-5. The margin specifications will always allow for at least two small words or one long word (approximately 10 characters).
+5. The margin specifications will always allow for at least one word to be displayed(approximately 10 characters).
+6. The input will only have one paragraph.
+7. The program will be developed iteratively as new edge cases unfold, hence it currently cannot gracefully handle
+   all margin specifications. :)
 
